@@ -24,6 +24,47 @@ $resultadoCategoria = $conexao->query($queryCategoria);
 
     <h1>Sistema de Gestão de Estoque</h1>
 
+    <h2>Produtos Cadastrados</h2>
+    <table class="tabela-roxa">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Categoria</th>
+                <th>Descrição</th>
+                <th>Preço</th>
+                <th>Estoque</th>
+                <th>Data de Validade</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <?php
+
+            while ($produto = $resultadoTabela->fetch_assoc()) {
+                echo "<tr>";
+                echo "<td>" . $produto['id'] . "</td>";
+                echo "<td>" . $produto['nome'] . "</td>";
+                echo "<td>" . $produto['categoria'] . "</td>";
+                echo "<td>" . $produto['descricao'] . "</td>";
+                echo "<td> R$ " . $produto['preco'] . "</td>";
+                echo "<td>" . $produto['quantidade'] . "</td>";
+                echo "<td>" . $produto['data_validade'] . "</td>";
+                echo "<td>
+                        <a href='public/editar.php?id=" . $produto['id'] . "' class='link-acao'>Editar</a> | 
+                        <a href='public/excluir.php?id=" . $produto['id'] . "' class='link-acao'>Excluir</a>
+                      </td>";
+                echo "</tr>";
+            }
+
+            ?>
+
+        </tbody>
+    </table>
+
+    <hr>
+
     <h2>Cadastrar Novo Produto</h2>
 
     <form action="public/cadastrar.php" method="POST">
@@ -54,10 +95,6 @@ $resultadoCategoria = $conexao->query($queryCategoria);
 
         <button type="submit" class="btn-roxo">Cadastrar Produto</button>
     </form>
-
-    <hr>
-
-    
 
 </body>
 
