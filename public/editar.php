@@ -1,15 +1,26 @@
 <?php
 include("../infra/conexao.php");
 
-$id = $_GET["id"];
+$id = $_GET["id"] ?? 0;
 
-$queryProduto = "SELECT p.id, p.nome, c.id AS categoria_id, c.descricao AS categoria, p.descricao, p.preco, p.quantidade, p.data_validade FROM produto p JOIN categoria c ON p.categoria_id = c.id WHERE p.id = $id";
-$resultadoProduto = $conexao->query($queryProduto);
+$queryProduto = "SELECT p.id, p.nome, c.id AS categoria_id, c.descricao AS categoria, p.descricao, p.preco, p.quantidade, p.data_validade FROM produto p JOIN categoria c ON p.categoria_id = c.id WHERE p.id = ?";
+$comandoProduto = mysqli_prepare($conexao, $queryProduto);
+mysqli_stmt_bind_param($comandoProduto, "i", $id);
+mysqli_stmt_execute($comandoProduto);
+$resultadoProduto = mysqli_stmt_get_result($comandoProduto);
 
 $produto = $resultadoProduto->fetch_assoc();
 
-$queryCategoria = "SELECT id, descricao FROM categoria WHERE id != " . $produto['categoria_id'];
-$resultadoCategoria = $conexao->query($queryCategoria);
+if (!$produto) {
+    echo "<script>alert('Erro: Produto não encontrado.'); window.location.href='../index.php';</script>";
+    exit();
+}
+
+$queryCategoria = "SELECT id, descricao FROM categoria WHERE id != ?";
+$comandoCategoria = mysqli_prepare($conexao, $queryCategoria);
+mysqli_stmt_bind_param($comandoCategoria, "i", $produto['categoria_id']);
+mysqli_stmt_execute($comandoCategoria);
+$resultadoCategoria = mysqli_stmt_get_result($comandoCategoria);
 ?>
 
 <!DOCTYPE html>
