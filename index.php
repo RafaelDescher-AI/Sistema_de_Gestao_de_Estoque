@@ -42,12 +42,12 @@ $resultadoCategoria = $conexao->query($queryCategoria);
         <tbody>
             <?php
 
-            while ($produto = $resultadoTabela->fetch_assoc()) {
+           while ($produto = $resultadoTabela->fetch_assoc()) {
                 echo "<tr>";
                 echo "<td>" . $produto['id'] . "</td>";
-                echo "<td>" . $produto['nome'] . "</td>";
-                echo "<td>" . $produto['categoria'] . "</td>";
-                echo "<td>" . $produto['descricao'] . "</td>";
+                echo "<td>" . htmlspecialchars($produto['nome']) . "</td>";
+                echo "<td>" . htmlspecialchars($produto['categoria']) . "</td>";
+                echo "<td>" . htmlspecialchars($produto['descricao']) . "</td>";
                 echo "<td> R$ " . $produto['preco'] . "</td>";
                 echo "<td>" . $produto['quantidade'] . "</td>";
                 echo "<td>" . $produto['data_validade'] . "</td>";
@@ -76,7 +76,7 @@ $resultadoCategoria = $conexao->query($queryCategoria);
             <option value="">Selecione</option>
             <?php
             while ($categoria = $resultadoCategoria->fetch_assoc()) {
-                echo "<option value='" . $categoria['id'] . "'>" . $categoria['descricao'] . "</option>";
+                echo "<option value='" . $categoria['id'] . "'>" . htmlspecialchars($categoria['descricao']) . "</option>";
             }
             ?>
         </select><br>

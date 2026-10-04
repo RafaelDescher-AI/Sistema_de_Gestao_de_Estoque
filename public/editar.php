@@ -41,30 +41,30 @@ $resultadoCategoria = mysqli_stmt_get_result($comandoCategoria);
         <input type="hidden" name="id" value="<?php echo $produto['id']; ?>">
 
         <label for="nome">Nome do Produto:</label><br>
-        <input type="text" id="nome" name="nome" value="<?php echo $produto['nome']; ?>" class="input-padrao"
+        <input type="text" id="nome" name="nome" value="<?php echo htmlspecialchars($produto['nome']); ?>" class="input-padrao"
             required><br>
 
         <label for="categoria">Categoria:</label><br>
         <select name="categoria_id" id="categoria" class="input-padrao">
-            <option value="<?php echo $produto['categoria_id']; ?>" selected><?php echo $produto['categoria']; ?>
+            <option value="<?php echo $produto['categoria_id']; ?>" selected><?php echo htmlspecialchars($produto['categoria']); ?>
             </option>
             <?php
 
             while ($categoria = $resultadoCategoria->fetch_assoc()) {
-                echo "<option value='" . $categoria['id'] . "'>" . $categoria['descricao'] . "</option>";
+                echo "<option value='" . $categoria['id'] . "'>" . htmlspecialchars($categoria['descricao']) . "</option>";
             }
             ?>
         </select><br>
 
         <label for="descricao">Descrição:</label><br>
         <textarea id="descricao" name="descricao" rows="4" cols="30"
-            class="input-padrao"><?php echo $produto['descricao']; ?></textarea><br>
+            class="input-padrao"><?php echo htmlspecialchars($produto['descricao']); ?></textarea><br>
 
         <label for="preco">Preço (R$):</label><br>
         <input type="number" step="0.01" id="preco" name="preco" value="<?php echo $produto['preco']; ?>"
             class="input-padrao" required><br>
 
-        <label for="quantidade_estoque">Quantidade em Estoque:</label><br>
+        <label for="quantidade">Quantidade em Estoque:</label><br>
         <input type="number" id="quantidade" name="quantidade" value="<?php echo $produto['quantidade']; ?>"
             class="input-padrao" required><br>
 
