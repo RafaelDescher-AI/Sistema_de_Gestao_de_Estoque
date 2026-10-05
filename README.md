@@ -16,6 +16,14 @@ Este é um projeto simples de CRUD (Create, Read, Update, Delete) desenvolvido e
 - A tabela `categoria` armazena o id e a descrição da categoria.
 - A tabela `produto` armazena nome, categoria, descrição, preço, quantidade em estoque e data de validade.
 
+## Instalação
+
+1. Instale o XAMPP e inicie o Apache e o MySQL.
+2. Clone este repositório dentro da pasta `htdocs` do XAMPP.
+3. Importe o arquivo `database/db.sql` no phpMyAdmin para criar o banco.
+4. Confira as credenciais no arquivo `infra/conexao.php`.
+5. Acesse o projeto pelo navegador em `http://localhost/nome-da-pasta/`.
+
 ## Configuração de Conexão
 
 As credenciais de acesso ao banco de dados estão configuradas no arquivo `infra/conexao.php`.
@@ -23,7 +31,7 @@ As credenciais de acesso ao banco de dados estão configuradas no arquivo `infra
 - Host: localhost
 - Usuário: root
 - Senha: (em branco)
-- Porta: 6608
+- Porta: 3306 (usado a 6608 caso não funcione)
 
 ## Funcionalidades (CRUD)
 
