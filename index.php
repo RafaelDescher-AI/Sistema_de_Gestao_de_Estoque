@@ -17,7 +17,6 @@ $resultadoCategoria = $conexao->query($queryCategoria);
 <head> 
     <meta charset="UTF-8">
     <title>Gestão de Estoque - Mercado</title>
-    <link rel="stylesheet" href="style/style.css">
 </head>
 
 <body>
